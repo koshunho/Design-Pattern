@@ -6,7 +6,7 @@ Some examples to help understanding design pattern
 面试被问到最多的设计模式除了单例就是代理了。为什么要学代理模式 --> AOP底层就是动态代理。
 
 #### 静态代理
-![静态代理](http://qcorkht4q.bkt.clouddn.com/blog静态代理.png)
+![静态工厂](http://qcorkht4q.bkt.clouddn.com/blog静态工厂_(2).png)
 
  - 抽象角色：一段使用**接口或抽象类**来实现
  - 真实角色：被代理的角色
@@ -108,3 +108,129 @@ Proxy 这个类的作用就是用来动态创建一个代理对象的类。使�
  - ...
  - 一个动态代理类，一般代理某一类业务
  - 一个动态代理可以代理多个类，**代理的是接口**！
+
+## 工厂模式
+
+**作用：实现了创建者和调用者的分离**
+
+![产品族和产品等级](http://qcorkht4q.bkt.clouddn.com/blog抽象工厂_(1).png)
+
+分类：
+
+ - 简单工厂模式
+    用来生产同一等级结构中的任意产品（对于增加新的产品，需要扩展已有代码）
+ - 工厂方法模式
+   用来生产同一登记结构中的固定产品（支持增加任意产品）
+ - 抽象工厂模式
+  围绕一个超级工厂创建其他工厂。该超级工厂又称为其他工厂的工厂。
+  
+OOP原则：
+ - 开闭原则：一个软件的实体应对扩展开放，对修改关闭
+ - 依赖倒转原则：只针对接口编程，不要针对实现编程
+
+核心本质：
+- **实例化对象不适用new，用工厂方法代替**
+- 将选择实现类，创建对象统一管理和控制。从而将调用者跟我们的实现类解耦
+
+#### 简单工厂
+![静态工厂](http://qcorkht4q.bkt.clouddn.com/blog静态工厂1.png)
+```java
+public interface Car {
+    void name();
+}
+```
+
+```java
+public class Wuling implements Car{
+    @Override
+    public void name() {
+        System.out.println("柳州五菱");
+    }
+}
+```
+```java
+public class Tesla implements Car{
+    @Override
+    public void name() {
+        System.out.println("特斯拉");
+    }
+}
+```
+```java
+public class CarFactory {
+    public static Car getCar(String car){
+        if(car.equals("Wuling")){
+            return new Wuling();
+        }else if(car.equals("Tesla")){
+            return new Tesla();
+        }else{
+            return null;
+        }
+    }
+}
+
+```
+```java
+public class Consumer {
+    public static void main(String[] args) {
+        // Car car1 = new Wuling();
+        // Car car2 = new Tesla();
+
+        //使用工厂创建：假设我们创建一个 Wuling，需要很多很多参数，直接new的时候要写大量参数是非常累的。
+        //写一个工厂类，里面就写好参数了，我们需要就直接调用这个工厂就好了(不需要考虑是怎么生产出来的)
+        Car car1 = CarFactory.getCar("Wuling");
+        Car car2 = CarFactory.getCar("Tesla");
+
+        car1.name();
+        car2.name();
+    }
+}
+```
+这种简单工厂的写法是通过switch-case来判断对象创建过程的。
+
+假设我们现在增加另一个款式的车，也实现了Car接口。但是这样我们就需要在CarFactory中修改代码了，违反了开闭原则。
+
+#### 工厂方法
+![工厂方法](http://qcorkht4q.bkt.clouddn.com/blog工厂方法1.png)
+ 
+ 为每种Car都实现了对应的CarFactory。
+ 
+ 工厂方法在简单工厂的基础上再包了一层工厂，所有的工厂都是此工厂的子类。
+ #### 抽象工厂
+ 定义：抽象工厂模式提供了一个创建一系列相关或者相互依赖对象的接口，无需指定他们具体的类
+ 
+
+ 适用场景：
+ - 客户端（应用层）不依赖产品类实例如何被创建、实现等细节
+ - 强调一系列相关的产品对象（属于同一产品族--> **简单理解，是同一个厂商的生产的不同种类产品**）一起使用创建对象需要大量的重复代码
+ - 提供一个产品类的库，所有的产品以同样的接口出现，从而使得客户端不依赖具体的实现
+
+优点：
+- 具体产品在应用层的代码隔离，无需关心创建的细节
+- 将一个系列的产品统一到一起创建
+
+缺点：
+- 规定了所有可能被创建的产品集合，**产品族中扩展新的产品困难**
+- 增加了系统的抽象性和理解难度
+
+![抽象工厂](http://qcorkht4q.bkt.clouddn.com/blog抽象工厂2.png)
+简单理解 --> 如果需要的产品是固定的，稳定的，就很强大，有效率。但是如果我在后期需要增加产品，比如要生产笔记本了，如果在ProductFactory中加一个笔记本，所有厂商都要实现这个接口方法。
+
+抽象工厂就是工厂的工厂。
+
+#### 总结
+
+ - 简单工厂模式
+   虽然某种程度上不符合设计原则，但实际使用最多！
+ - 工厂方法模式
+   不修改已有类的前提下，通过增加新的工厂类实现扩展。
+ - 抽象工厂模式
+   不可以增加产品，可以增加产品族！
+   
+应用场景：
+ - JDBC中的Connection对象的获取
+ - Sping中IOC容器创建管理bean对象
+ - 反射中Class对象的newInstance方法
+
+   
+
