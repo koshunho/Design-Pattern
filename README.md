@@ -6,7 +6,7 @@ Some examples to help understanding design pattern
 面试被问到最多的设计模式除了单例就是代理了。为什么要学代理模式 --> AOP底层就是动态代理。
 
 #### 静态代理
-![静态工厂](http://qcorkht4q.bkt.clouddn.com/blog静态工厂_(2).png)
+![静态代理](http://qcorkht4q.bkt.clouddn.com/blog静态代理.png)
 
  - 抽象角色：一段使用**接口或抽象类**来实现
  - 真实角色：被代理的角色
