@@ -1,6 +1,10 @@
 # Design-Pattern
 Some examples to help understanding design pattern
 
+* [Design-Pattern](#design-pattern)
+	* [代理模式](#代理模式)
+	* [工厂模式](#工厂模式)
+
 ## 代理模式
 
 面试被问到最多的设计模式除了单例就是代理了。为什么要学代理模式 --> AOP底层就是动态代理。
@@ -232,5 +236,62 @@ public class Consumer {
  - Sping中IOC容器创建管理bean对象
  - 反射中Class对象的newInstance方法
 
-   
+ ## 适配者模式
+ **作用：由于接口不兼容而不能一起工作的那些类可以在一起工作**
 
+小黄在日本买了一个电器，但是日本电压是110V，中国电压是220V，拿到中国用不了。
+
+所以需要一个Adapter将220V转换成110V
+
+1. 创建Target接口（期待得到的插头）：能输出110V（将220V转换成110V）
+```java
+// Target接口：期望得到的插头 能把220V转换成110V
+public interface Target {
+    void convert_110v();
+}
+```
+
+2.  创建源类（原有的插头）
+```java
+//源类（电源 只能输出220V的电压）
+public class PowerSupply220V {
+    public void output_220v(){}
+}
+
+```
+3. 创建适配器类（Adapter）
+```java
+public class Adapter extends PowerSupply220V implements Target{
+    //期待的插头要调用convert_110v方法，但原插头没有
+    //所以使用Adapter来实现这个方法
+    //实际上convert_110v()只是调用原有插头的output_220v()方法而已
+    //Adapter只是将output_220v()做了一层封装，封装成Target可以调用的convert_110v()而已
+    @Override
+    public void convert_110v() {
+        output_220v();
+    }
+}
+```
+4. 具体使用目标类，并通过Adapter类调用所需要的方法从而实现目标（不需要通过原有插头）
+```java
+//パソコン
+public class Pasokon {
+
+    private Target power_110v;
+
+    Pasokon(Target power_110v){
+        this.power_110v = power_110v;
+        System.out.println("このパソコンは正常に動作しています。");
+    }
+
+    public static void main(String[] args) {
+        Target adapter = new Adapter();
+
+        Pasokon pasokon = new Pasokon(adapter);
+    }
+}
+```
+
+优点：系统需要使用现有的类，而此类的接口不符合系统的需要。那么通过适配器模式就可以让这些功能得到更好的复用。
+
+缺点：过多的使用适配器，会让系统非常零乱，不易整体进行把握
