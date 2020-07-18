@@ -10,7 +10,7 @@ Some examples to help understanding design pattern
 面试被问到最多的设计模式除了单例就是代理了。为什么要学代理模式 --> AOP底层就是动态代理。
 
 #### 静态代理
-![静态工厂](http://qcorkht4q.bkt.clouddn.com/blog静态工厂_(2).png)
+![静态代理](http://qcorkht4q.bkt.clouddn.com/blog静态代理.png)
 
  - 抽象角色：一段使用**接口或抽象类**来实现
  - 真实角色：被代理的角色
@@ -218,6 +218,8 @@ public class Consumer {
 - 增加了系统的抽象性和理解难度
 
 ![抽象工厂](http://qcorkht4q.bkt.clouddn.com/blog抽象工厂2.png)
+
+
 简单理解 --> 如果需要的产品是固定的，稳定的，就很强大，有效率。但是如果我在后期需要增加产品，比如要生产笔记本了，如果在ProductFactory中加一个笔记本，所有厂商都要实现这个接口方法。
 
 抽象工厂就是工厂的工厂。
