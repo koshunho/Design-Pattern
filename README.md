@@ -300,7 +300,7 @@ public class Pasokon {
 缺点：过多的使用适配器，会让系统非常零乱，不易整体进行把握
 
 ## 单例模式
-设计模式王中王。直接说最常见的Double Check Lock
+设计模式王中王。直接说最常见的Double-Checked Locking
 
 核心：
 - 单例模式唯一实例必须volatile static;
