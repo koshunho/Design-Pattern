@@ -4,6 +4,7 @@ Some examples to help understanding design pattern
 * [Design-Pattern](#design-pattern)
 	* [代理模式](#代理模式)
 	* [工厂模式](#工厂模式)
+	* [单例模式](#单例模式)
 
 ## 代理模式
 
