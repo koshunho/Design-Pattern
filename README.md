@@ -11,7 +11,7 @@ Some examples to help understanding design pattern
 面试被问到最多的设计模式除了单例就是代理了。为什么要学代理模式 --> AOP底层就是动态代理。
 
 #### 静态代理
-![静态代理](http://qcorkht4q.bkt.clouddn.com/blog静态代理.png)
+![静态代理](https://raw.githubusercontent.com/koshunho/koshunhopic/master/blog静态代理.png)
 
  - 抽象角色：一段使用**接口或抽象类**来实现
  - 真实角色：被代理的角色
@@ -37,7 +37,7 @@ Some examples to help understanding design pattern
 	
 再深入例子：package com.huang.proxy.staticproxy.crud
 
-![横向编程](http://qcorkht4q.bkt.clouddn.com/blog横向编程.png)
+![横向编程](https://raw.githubusercontent.com/koshunho/koshunhopic/master/blog横向编程.png)
 
 #### 动态代理
 动态代理的代理类是动态生成的，静态代理的代理类是我们提前写好的。
@@ -118,7 +118,7 @@ Proxy 这个类的作用就是用来动态创建一个代理对象的类。使�
 
 **作用：实现了创建者和调用者的分离**
 
-![产品族和产品等级](http://qcorkht4q.bkt.clouddn.com/blog抽象工厂_(1).png)
+![产品族和产品等级](https://raw.githubusercontent.com/koshunho/koshunhopic/master/blog抽象工厂_(1).png)
 
 分类：
 
@@ -138,7 +138,7 @@ OOP原则：
 - 将选择实现类，创建对象统一管理和控制。从而将调用者跟我们的实现类解耦
 
 #### 简单工厂
-![静态工厂](http://qcorkht4q.bkt.clouddn.com/blog静态工厂1.png)
+![静态工厂](https://raw.githubusercontent.com/koshunho/koshunhopic/master/blog静态工厂1.png)
 ```java
 public interface Car {
     void name();
@@ -196,7 +196,7 @@ public class Consumer {
 假设我们现在增加另一个款式的车，也实现了Car接口。但是这样我们就需要在CarFactory中修改代码了，违反了开闭原则。
 
 #### 工厂方法
-![工厂方法](http://qcorkht4q.bkt.clouddn.com/blog工厂方法1.png)
+![工厂方法](https://raw.githubusercontent.com/koshunho/koshunhopic/master/blog工厂方法1.png)
  
  为每种Car都实现了对应的CarFactory。
  
@@ -218,7 +218,7 @@ public class Consumer {
 - 规定了所有可能被创建的产品集合，**产品族中扩展新的产品困难**
 - 增加了系统的抽象性和理解难度
 
-![抽象工厂](http://qcorkht4q.bkt.clouddn.com/blog抽象工厂2.png)
+![抽象工厂](https://raw.githubusercontent.com/koshunho/koshunhopic/master/blog抽象工厂2.png)
 
 
 简单理解 --> 如果需要的产品是固定的，稳定的，就很强大，有效率。但是如果我在后期需要增加产品，比如要生产笔记本了，如果在ProductFactory中加一个笔记本，所有厂商都要实现这个接口方法。
